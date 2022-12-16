@@ -27,5 +27,10 @@ pdx <- stats_all$Team == 'Portland'
 
 #plot data
 
-a <- ggplot(data=stats_all[!pdx,],aes(x=Offense,y=Defense,shape=Year,size=W))
-a + geom_point(alpha=0.7,color="Black")
+a <- ggplot(data=stats_all,aes(x=Offense,y=Defense,shape=Year))
+a + geom_point(data=stats_all[!pdx,],color="Black",size=3) + 
+  geom_point(data=stats_all[pdx,],alpha=0.7,color="Red",size=3) + 
+  geom_label(data=stats_all[pdx,],aes(label=paste('O Rtg:',Offense)),nudge_y=0.8) +
+  xlab('Offensive Rating') +
+  ylab('Defensive Rating') +
+  ggtitle('Team Ratings', subtitle = 'Portland highlighted')
